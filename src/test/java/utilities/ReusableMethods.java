@@ -33,23 +33,7 @@ public class ReusableMethods {
         return stringList;
     }
 
-    public static void titleIleWindowGecisi( String hedefWindowTitle){
-    }
 
-    public static void urlIleWindowGecisi( String hedefWindowUrl){
-    }
-
-    public static void tumSayfaScreenshot(WebDriver driver) {
-    }
-
-    public static void isimliTumSayfaScreenshot(WebDriver driver,String resimIsmi) {
-    }
-
-    public static void webElementScreenshot(WebElement hedefElement){
-    }
-
-    public static void isimliWebElementScreenshot(WebElement hedefElement, String resimIsmi){
-    }
 
 
 }
