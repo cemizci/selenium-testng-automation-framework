@@ -21,11 +21,6 @@ public abstract class BaseTest {
         softAssert = new SoftAssert();
     }
 
-//    @AfterMethod(alwaysRun = true)
-//    public void afterEach(){
-//        softAssert.assertAll();
-//    }
-
     @AfterClass(alwaysRun = true)
     public void afterAll(){
         Driver.quitDriver();
