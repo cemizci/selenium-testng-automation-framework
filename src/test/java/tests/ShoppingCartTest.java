@@ -9,7 +9,6 @@ import services.CheckoutService;
 import services.LoginService;
 import utilities.ConfigReader;
 import utilities.Driver;
-import utilities.Print;
 import utilities.WaitUtils;
 
 public class ShoppingCartTest extends BaseTest {
