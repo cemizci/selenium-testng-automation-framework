@@ -1,8 +1,10 @@
 # Selenium TestNG Automation Framework
 
-A professional UI test automation framework built with **Java, Selenium, TestNG**, and **Page Object Model**, designed with a **Service Layer architecture** for scalable and maintainable test automation.
+A professional **UI Test Automation Framework** built with **Java, Selenium, and TestNG**, designed to demonstrate **real-world QA Automation best practices**, including clean architecture, reusable services, and scalable test design.
 
-# Tech Stack
+---
+
+## 🛠 Tech Stack
 - Java
 - Selenium WebDriver
 - TestNG
@@ -12,28 +14,54 @@ A professional UI test automation framework built with **Java, Selenium, TestNG*
 - Explicit Wait Strategy
 - Config-driven Test Data
 
-- # Project Structure
-- src/test/java
-├── base # Base test setup
-├── pages # Page Objects
-├── services # Business logic layer
-├── tests # Test scenarios
-└── utilities # Driver, Wait, Browser utils
+---
 
-# Sample Test Scenario
-- Login with valid user
-- Search product
-- Add product to cart
-- Verify cart product
-- Place order (E2E flow)
+## 🧠 Architecture Overview
 
- # Highlights
+This framework follows a layered automation architecture:
 
-- Clean architecture with BaseTest + Services + Utils
-- Explicit wait strategy (stable & non-flaky tests)
-- Scroll & browser utility abstraction
-- Reusable login & cart flows
-- Soft assertion strategy
+- **Tests Layer** → High-level test scenarios  
+- **Service Layer** → Business workflows (Login, Cart, Checkout)  
+- **Page Object Layer** → UI locators & page interactions  
+- **Utilities Layer** → Driver, waits, browser helpers  
+- **Base Layer** → Setup & teardown management  
+
+This structure ensures **clean separation of concerns, scalability, and maintainability**.
+
+---
+
+## ✨ Key Features
+
+- Selenium WebDriver + Java + TestNG  
+- Page Object Model (POM)  
+- Service Layer architecture  
+- Explicit Wait & Browser Utilities  
+- Config-driven test execution  
+- Soft Assertion Test Strategy  
+- End-to-End UI Automation Scenarios  
+- Clean and scalable framework structure  
+
+---
+
+## 🧪 Sample End-to-End Test Scenario
+
+- Login with a valid user  
+- Search for a product  
+- Add product to cart  
+- Verify cart product  
+- Complete order flow (E2E)  
+
+---
+
+## ⭐ Highlights
+
+- Clean architecture using **BaseTest + Services + Utilities**  
+- Explicit wait strategy for **stable & non-flaky tests**  
+- Browser utilities (scroll, click, navigation)  
+- Reusable login & cart workflows  
+- Soft assertion test strategy  
+
+---
 
 - # Configuration
 Create a `configuration.properties` file based on the example:
@@ -46,6 +74,17 @@ validPassword=your_password
 searchTerm=iphone
 ```
 
-Author
-Cem Izci
-QA Automation Engineer (in progress)
+
+---
+
+##
+
+```md
+## 👨‍💻 Author
+
+**Cem Izci**  
+QA Automation Engineer -SDET (in progress)  
+Java • Selenium • TestNG • Cucumber  
+
+📌 Open to Junior / Mid QA Automation opportunities
+
