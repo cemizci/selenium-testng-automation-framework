@@ -1,12 +1,12 @@
-package tests;
+package tests.TestOtomasyonu;
 
 import base.BaseTest;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
-import pages.TestOtomasyonuPage;
-import services.CartService;
-import services.CheckoutService;
-import services.LoginService;
+import pages.TestOtomasyonuPage.TestOtomasyonuPage;
+import services.TestOtomasyonu.CartService;
+import services.TestOtomasyonu.CheckoutService;
+import services.TestOtomasyonu.LoginService;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.WaitUtils;

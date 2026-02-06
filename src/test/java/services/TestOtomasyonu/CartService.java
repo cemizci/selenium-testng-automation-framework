@@ -1,12 +1,10 @@
-package services;
+package services.TestOtomasyonu;
 
 import org.openqa.selenium.Keys;
-import pages.TestOtomasyonuPage;
+import pages.TestOtomasyonuPage.TestOtomasyonuPage;
 import utilities.BrowserUtils;
 import utilities.ConfigReader;
 import utilities.WaitUtils;
-
-import javax.swing.*;
 
 public class CartService {
 

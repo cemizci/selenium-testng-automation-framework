@@ -1,7 +1,6 @@
-package services;
+package services.TestOtomasyonu;
 
-import org.openqa.selenium.support.ui.Wait;
-import pages.TestOtomasyonuPage;
+import pages.TestOtomasyonuPage.TestOtomasyonuPage;
 import utilities.BrowserUtils;
 import utilities.WaitUtils;
 

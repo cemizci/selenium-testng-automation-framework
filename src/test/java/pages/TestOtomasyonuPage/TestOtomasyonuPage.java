@@ -1,12 +1,10 @@
-package pages;
+package pages.TestOtomasyonuPage;
 
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.devtools.v140.page.Page;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
-import javax.xml.xpath.XPath;
 import java.util.List;
 
 public class TestOtomasyonuPage {
