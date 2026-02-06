@@ -15,14 +15,14 @@ public class WaitUtils {
     }
 
     public static void waitForVisibility(WebElement element, int seconds){
-        getWait().until(ExpectedConditions.visibilityOf(element));
+        getWait(5).until(ExpectedConditions.visibilityOf(element));
     }
 
     public static void waitForClickability(WebElement element){
-        getWait().until(ExpectedConditions.elementToBeClickable(element));
+        getWait(5).until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public static void waitUrlContains(String text) {
-        getWait().until(ExpectedConditions.urlContains(text));
+        getWait(5).until(ExpectedConditions.urlContains(text));
     }
 }
