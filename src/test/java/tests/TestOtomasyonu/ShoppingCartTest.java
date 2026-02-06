@@ -24,7 +24,7 @@ public class ShoppingCartTest extends BaseTest {
      Reporter.log("Profil sayfasina basariyla giris yapildi!", true);
 
      String expectedName = CartService.searchAndAddFirstProductToCart(page);
-     WaitUtils.waitForVisibility(page.yourCartPageProductName);
+     WaitUtils.waitForVisibility(page.yourCartPageProductName, 5);
      String actualName = page.yourCartPageProductName.getText();
 
      softAssert.assertEquals(actualName, expectedName, "Sepetteki ürün ismi farklı!");

@@ -10,11 +10,11 @@ import java.time.Duration;
 
 public class WaitUtils {
 
-    private static WebDriverWait getWait() {
-        return new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
+    private static WebDriverWait getWait(int seconds) {
+        return new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(seconds));
     }
 
-    public static void waitForVisibility(WebElement element){
+    public static void waitForVisibility(WebElement element, int seconds){
         getWait().until(ExpectedConditions.visibilityOf(element));
     }
 

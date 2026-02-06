@@ -9,7 +9,7 @@ public class LoginService {
         WaitUtils.waitForClickability(page.accountLinki);
         page.accountLinki.click();
 
-        WaitUtils.waitForVisibility(page.loginPageEmailBox);
+        WaitUtils.waitForVisibility(page.loginPageEmailBox, 5);
         page.loginPageEmailBox.sendKeys(ConfigReader.getProperty("validEmail"));
         page.loginPagePasswordBox.sendKeys(ConfigReader.getProperty("validPassword"));
 

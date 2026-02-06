@@ -10,6 +10,9 @@ public class ProductsPage {
         PageFactory.initElements(Driver.getDriver(),this);
     }
 
+    @FindBy(css = ".title")
+    public WebElement pageTitle;
+
     @FindBy (xpath = "//button[contains(text(), 'Add to cart')]")
     public WebElement addToCartButton;
 
