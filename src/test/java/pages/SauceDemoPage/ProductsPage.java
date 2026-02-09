@@ -5,6 +5,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
+import java.util.List;
+
 public class ProductsPage {
     public ProductsPage(){
         PageFactory.initElements(Driver.getDriver(),this);
@@ -21,4 +23,10 @@ public class ProductsPage {
 
     @FindBy (xpath = "//span[@class='shopping_cart_badge']")
     public WebElement shoppingCartBadge;
+
+    @FindBy(css = ".inventory_item")
+    public List<WebElement> productCards;
+
+    @FindBy(css = ".inventory_list")
+    public WebElement inventoryList;
 }

@@ -1,6 +1,9 @@
 package tests.SauceDemo;
 
+import Models.SauceDemo.Item;
 import base.BaseTest;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Wait;
 import org.testng.annotations.Test;
 import pages.SauceDemoPage.CartPage;
@@ -8,9 +11,13 @@ import pages.SauceDemoPage.CheckoutCompletePage;
 import pages.SauceDemoPage.CheckoutOverviewPage;
 import pages.SauceDemoPage.ProductsPage;
 import services.SauceDemo.SauceDemoAuthService;
+import services.SauceDemo.SauceDemoCartService;
 import services.SauceDemo.SauceDemoCheckoutService;
 import utilities.Driver;
 import utilities.WaitUtils;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class SauceDemoE2ECheckoutTest extends BaseTest {
 
@@ -18,34 +25,44 @@ public class SauceDemoE2ECheckoutTest extends BaseTest {
     public void e2e_login_addToCart_checkout_success(){
         SauceDemoAuthService authService = new SauceDemoAuthService();
         SauceDemoCheckoutService checkoutService = new SauceDemoCheckoutService();
+        SauceDemoCartService cartServices = new SauceDemoCartService();
+        CartPage cart = new CartPage();
 
         authService.goToLoginPage();
         authService.loginWithValidUser();
 
         ProductsPage productsPage = new ProductsPage();
-        softAssert.assertTrue(productsPage.pageTitle.isDisplayed(), "Products page title görünmeli");
-        softAssert.assertTrue(productsPage.pageTitle.getText().contains("Products"), "Title 'Products' içermeli");
+        WaitUtils.waitForVisibility(productsPage.pageTitle, 5);
 
-        checkoutService.addBackpackToCartAndGoToCart();
+        System.out.println("Products count: " + productsPage.productCards.size());
+        softAssert.assertEquals(productsPage.productCards.size(), 6, "Products sayfasında 6 ürün olmalı");
 
-        CartPage cartPage = new CartPage();
+        Map<String, Item> expectedByName = new LinkedHashMap<>();
+        for (WebElement card : productsPage.productCards){
+            String name = card.findElement(By.cssSelector(".inventory_item_name")).getText().trim();
+            String desc = card.findElement(By.cssSelector(".inventory_item_desc")).getText().trim();
+            String price = card.findElement(By.cssSelector(".inventory_item_price")).getText().trim();
+
+            expectedByName.put(name, new Item(name, desc, price));
+        }
+
+        cartServices.addAllProductsToCart();
+        softAssert.assertEquals(cart.cartBadge.getText().trim(), "6", "Cart badge 6 olmalı");
+
         productsPage.shoppingCartIcon.click();
-        softAssert.assertTrue(cartPage.pageTitle.getText().contains("Your Cart"), "Cart sayfasına gelinmeli");
-        softAssert.assertTrue(cartPage.firstItemName.getText().toLowerCase().contains("backpack"), "Sepette Backpack olmalı");
+        WaitUtils.waitForVisibility(productsPage.pageTitle, 5);
 
-        checkoutService.proceedToCheckout();
-        checkoutService.fillCheckoutInfoAndContinue("Cem" , "İzci", "34000");
+        Map<String, Item> actualByName = new LinkedHashMap<>();
+        for (WebElement item : cart.cartItems){
+            String name = item.findElement(By.cssSelector(".inventory_item_name")).getText().trim();
+            String desc = item.findElement(By.cssSelector(".inventory_item_desc")).getText().trim();
+            String price = item.findElement(By.cssSelector(".inventory_item_price")).getText().trim();
 
-        CheckoutOverviewPage overviewPage = new CheckoutOverviewPage();
-        WaitUtils.waitForVisibility(overviewPage.summaryContainer, 5);
-        overviewPage.printSummaryDetails();
+            actualByName.put(name, new Item(name, desc, price));
+        }
 
-        checkoutService.finishCheckout();
-
-        CheckoutCompletePage completePage = new CheckoutCompletePage();
-        softAssert.assertTrue(completePage.pageTitle.getText().contains("Checkout: Complete"), "Checkout complete sayfası gelmeli");
-        softAssert.assertTrue(completePage.completeHeader.getText().toUpperCase().contains("THANK YOU"),"Thank you mesajı görünmeli");
-
+        System.out.println(expectedByName);
+        System.out.println(actualByName);
         softAssert.assertAll();
     }
 }

@@ -30,7 +30,7 @@ public class CheckoutOverviewPage {
     @FindBy(css = ".summary_value_label, .summary_subtotal_label, .summary_tax_label, .summary_total_label")
     public List<WebElement> summaryValues;
 
-    // Totaller ayrı (bunlar zaten full text içeriyor)
+
     @FindBy(css = ".summary_subtotal_label")
     public WebElement itemTotalLabel;
 
