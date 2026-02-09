@@ -15,4 +15,5 @@ public class CheckoutCompletePage {
 
     @FindBy(css = ".complete-header")
     public WebElement completeHeader;
+
 }

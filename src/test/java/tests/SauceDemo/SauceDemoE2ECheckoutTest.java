@@ -1,12 +1,16 @@
 package tests.SauceDemo;
 
 import base.BaseTest;
+import org.openqa.selenium.support.ui.Wait;
 import org.testng.annotations.Test;
 import pages.SauceDemoPage.CartPage;
 import pages.SauceDemoPage.CheckoutCompletePage;
+import pages.SauceDemoPage.CheckoutOverviewPage;
 import pages.SauceDemoPage.ProductsPage;
 import services.SauceDemo.SauceDemoAuthService;
 import services.SauceDemo.SauceDemoCheckoutService;
+import utilities.Driver;
+import utilities.WaitUtils;
 
 public class SauceDemoE2ECheckoutTest extends BaseTest {
 
@@ -31,6 +35,11 @@ public class SauceDemoE2ECheckoutTest extends BaseTest {
 
         checkoutService.proceedToCheckout();
         checkoutService.fillCheckoutInfoAndContinue("Cem" , "İzci", "34000");
+
+        CheckoutOverviewPage overviewPage = new CheckoutOverviewPage();
+        WaitUtils.waitForVisibility(overviewPage.summaryContainer, 5);
+        overviewPage.printSummaryDetails();
+
         checkoutService.finishCheckout();
 
         CheckoutCompletePage completePage = new CheckoutCompletePage();
