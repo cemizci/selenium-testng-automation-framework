@@ -29,4 +29,7 @@ public class ProductsPage {
 
     @FindBy(css = ".inventory_list")
     public WebElement inventoryList;
+
+    @FindBy(css = ".inventory_item button.btn_inventory")
+    public List<WebElement> inventoryButtons;
 }
