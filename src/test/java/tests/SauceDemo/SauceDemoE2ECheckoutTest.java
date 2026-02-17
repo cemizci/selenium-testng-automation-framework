@@ -24,9 +24,7 @@ public class SauceDemoE2ECheckoutTest extends BaseTest {
     @Test
     public void e2e_login_addToCart_checkout_success(){
         SauceDemoAuthService authService = new SauceDemoAuthService();
-        SauceDemoCheckoutService checkoutService = new SauceDemoCheckoutService();
         SauceDemoCartService cartServices = new SauceDemoCartService();
-        CartPage cart = new CartPage();
 
         authService.goToLoginPage();
         authService.loginWithValidUser();
@@ -37,29 +35,21 @@ public class SauceDemoE2ECheckoutTest extends BaseTest {
         System.out.println("Products count: " + productsPage.productCards.size());
         softAssert.assertEquals(productsPage.productCards.size(), 6, "Products sayfasında 6 ürün olmalı");
 
-        Map<String, Item> expectedByName = new LinkedHashMap<>();
-        for (WebElement card : productsPage.productCards){
-            String name = card.findElement(By.cssSelector(".inventory_item_name")).getText().trim();
-            String desc = card.findElement(By.cssSelector(".inventory_item_desc")).getText().trim();
-            String price = card.findElement(By.cssSelector(".inventory_item_price")).getText().trim();
-
-            expectedByName.put(name, new Item(name, desc, price));
-        }
+        Map<String, Item> expectedByName = cartServices.getAllProductsFromProductsPage();
 
         cartServices.addAllProductsToCart();
-        softAssert.assertEquals(cart.cartBadge.getText().trim(), "6", "Cart badge 6 olmalı");
+        softAssert.assertFalse(productsPage.cartBadges.isEmpty(),
+                "Cart badge görünmeli");
+
+        softAssert.assertEquals(productsPage.cartBadges.get(0).getText().trim(),
+                "6", "Cart badge 6 olmalı");
 
         productsPage.shoppingCartIcon.click();
-        WaitUtils.waitForVisibility(productsPage.pageTitle, 5);
 
-        Map<String, Item> actualByName = new LinkedHashMap<>();
-        for (WebElement item : cart.cartItems){
-            String name = item.findElement(By.cssSelector(".inventory_item_name")).getText().trim();
-            String desc = item.findElement(By.cssSelector(".inventory_item_desc")).getText().trim();
-            String price = item.findElement(By.cssSelector(".inventory_item_price")).getText().trim();
+        CartPage cartPage = new CartPage();
+        WaitUtils.waitForVisibility(cartPage.pageTitle, 5);
 
-            actualByName.put(name, new Item(name, desc, price));
-        }
+        Map<String, Item> actualByName = cartServices.getAllItemsFromCartPage();
 
         softAssert.assertEquals(actualByName.size(), expectedByName.size(),
                 "Cart'taki ürün sayısı products ile aynı olmalı");

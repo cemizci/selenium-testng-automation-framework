@@ -27,19 +27,32 @@ public class SauceDemo_AddRemove_StateTest extends BaseTest {
 
         for (WebElement btn : productsPage.inventoryButtons){
             softAssert.assertEquals(btn.getText().trim(), "Remove", "Tüm butonlar Remove olmalı");
+            System.out.println(btn.getText());
         }
 
-        softAssert.assertEquals(productsPage.shoppingCartBadge.getText().trim(), "6", "Badge 6 olmalı");
-        System.out.println(productsPage.shoppingCartBadge.getText());
+        softAssert.assertFalse(cartPage.cartBadge.isEmpty(), "Badge görünmeli");
+        softAssert.assertEquals(cartPage.cartBadge.get(0).getText().trim(), "6", "Badge 6 olmalı");
+        System.out.println(cartPage.cartBadge.get(0).getText());
 
-        for (WebElement btn : productsPage.inventoryButtons){
-            btn.click();
-            softAssert.assertEquals(btn.getText().trim(), "Add to cart" , "Tüm Butonlar Add To Cart olmalı");
-        }
+        productsPage.shoppingCartIcon.click();
 
+        cartPage = new CartPage();
+        WaitUtils.waitForVisibility(cartPage.pageTitle, 5);
+        softAssert.assertEquals(cartPage.cartItems.size(), 6, "6 adet ürün olmalı");
 
+        cartPage.continueShoppingButton.click();
 
+        ProductsPage refreshed = new ProductsPage();
 
+        cartService.removeAllProductsFromProductPage();
+        softAssert.assertTrue(refreshed.cartBadges.isEmpty(), "Remove sonrası badge kaybolmalı");
+
+        refreshed.shoppingCartIcon.click();
+        CartPage cartPage2 = new CartPage();
+        WaitUtils.waitForVisibility(cartPage2.pageTitle, 5);
+
+        softAssert.assertTrue(cartPage2.cartItems.isEmpty(), "liste boş olmalı");
+        System.out.println(cartPage2.cartItems.size());
 
         softAssert.assertAll();
     }

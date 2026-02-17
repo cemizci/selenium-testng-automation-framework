@@ -21,6 +21,9 @@ public class CartPage {
     @FindBy(id = "checkout")
     public WebElement checkoutButton;
 
+    @FindBy (id = "continue-shopping")
+    public  WebElement continueShoppingButton;
+
     @FindBy(css = ".cart_item .inventory_item_name")
     public WebElement cartItemName;
 
@@ -34,7 +37,7 @@ public class CartPage {
     public WebElement cartItemPiece;
 
     @FindBy(css = ".shopping_cart_badge")
-    public WebElement cartBadge;
+    public List<WebElement> cartBadge;
 
     @FindBy(css = ".cart_item")
     public List<WebElement> cartItems;

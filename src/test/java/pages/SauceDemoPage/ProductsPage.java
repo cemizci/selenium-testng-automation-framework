@@ -18,11 +18,18 @@ public class ProductsPage {
     @FindBy (xpath = "//button[contains(text(), 'Add to cart')]")
     public WebElement addToCartButton;
 
+    @FindBy(xpath = "//button[normalize-space()='Remove']")
+    public WebElement removeButtons;
+
     @FindBy (xpath = "//*[@class='shopping_cart_link']")
     public WebElement shoppingCartIcon;
 
     @FindBy (xpath = "//span[@class='shopping_cart_badge']")
     public WebElement shoppingCartBadge;
+
+    @FindBy(css = ".shopping_cart_badge")
+    public List<WebElement> cartBadges;
+
 
     @FindBy(css = ".inventory_item")
     public List<WebElement> productCards;
