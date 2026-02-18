@@ -1,5 +1,6 @@
 package pages.SauceDemoPage;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -39,6 +40,23 @@ public class CartPage {
     @FindBy(css = ".shopping_cart_badge")
     public List<WebElement> cartBadge;
 
-    @FindBy(css = ".cart_item")
+    @FindBy(css = "[data-test='title']")
+    public WebElement pageTitle2;
+
+    @FindBy(css = "[data-test='inventory-item']")
     public List<WebElement> cartItems;
+
+    @FindBy(css = "[data-test='checkout']")
+    public WebElement btnCheckout;
+
+    @FindBy(css = "[data-test='shopping-cart-badge']")
+    public WebElement cartBadge2;
+
+    @FindBy(css = ".cart_item")
+    public List<WebElement> cartItems2;
+
+    public By itemName  = By.cssSelector("[data-test='inventory-item-name']");
+    public By itemDesc  = By.cssSelector("[data-test='inventory-item-desc']");
+    public By itemPrice = By.cssSelector("[data-test='inventory-item-price']");
+
 }

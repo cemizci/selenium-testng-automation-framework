@@ -13,6 +13,7 @@ import pages.SauceDemoPage.ProductsPage;
 import services.SauceDemo.SauceDemoAuthService;
 import services.SauceDemo.SauceDemoCartService;
 import services.SauceDemo.SauceDemoCheckoutService;
+import services.TestOtomasyonu.CheckoutService;
 import utilities.Driver;
 import utilities.WaitUtils;
 
@@ -68,6 +69,12 @@ public class SauceDemoE2ECheckoutTest extends BaseTest {
 
         System.out.println(expectedByName);
         System.out.println(actualByName);
+
+        cartPage = new CartPage();
+        SauceDemoCheckoutService checkoutService = new SauceDemoCheckoutService();
+        checkoutService.proceedToCheckout();
+        checkoutService.fillCheckoutInfoAndContinue("a","b","3");
+        System.out.println(cartPage.cartItems.size());
         softAssert.assertAll();
     }
 }

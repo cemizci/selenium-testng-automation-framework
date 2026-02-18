@@ -1,10 +1,7 @@
 package services.SauceDemo;
 
 import org.openqa.selenium.support.ui.Wait;
-import pages.SauceDemoPage.CartPage;
-import pages.SauceDemoPage.CheckoutInfoPage;
-import pages.SauceDemoPage.CheckoutOverviewPage;
-import pages.SauceDemoPage.ProductsPage;
+import pages.SauceDemoPage.*;
 import utilities.WaitUtils;
 
 public class SauceDemoCheckoutService {
@@ -37,5 +34,13 @@ public class SauceDemoCheckoutService {
         CheckoutOverviewPage overviewPage = new CheckoutOverviewPage();
         WaitUtils.waitForVisibility(overviewPage.finishButton, 5);
         overviewPage.finishButton.click();
+
+        CheckoutCompletePage complete = new CheckoutCompletePage();
+        WaitUtils.waitForVisibility(complete.pageTitle, 5);
+    }
+
+    public void completeCheckout(String firstName, String lastName, String zip) {
+        fillCheckoutInfoAndContinue(firstName, lastName, zip);
+        finishCheckout();
     }
 }

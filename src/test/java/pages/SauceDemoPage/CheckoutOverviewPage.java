@@ -40,6 +40,21 @@ public class CheckoutOverviewPage {
     @FindBy(css = ".summary_total_label")
     public WebElement totalLabel;
 
+    @FindBy(css = "[data-test='payment-info-value']")
+    public WebElement paymentInfo;
+
+    @FindBy(css = "[data-test='shipping-info-value']")
+    public WebElement shippingInfo;
+
+    @FindBy(css = "[data-test='subtotal-label']")
+    public WebElement itemTotal;
+
+    @FindBy(css = "[data-test='tax-label']")
+    public WebElement tax;
+
+    @FindBy(css = "[data-test='total-label']")
+    public WebElement total;
+
     public void printSummaryDetails() {
 
         System.out.println("=== SUMMARY ===");

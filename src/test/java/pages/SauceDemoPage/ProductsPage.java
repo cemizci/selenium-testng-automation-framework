@@ -1,5 +1,6 @@
 package pages.SauceDemoPage;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -39,4 +40,23 @@ public class ProductsPage {
 
     @FindBy(css = ".inventory_item button.btn_inventory")
     public List<WebElement> inventoryButtons;
+
+    @FindBy(css = "[data-test='title']")
+    public WebElement pageTitle2; // "Products"
+
+    @FindBy(css = "[data-test='inventory-item']")
+    public List<WebElement> productCards2;
+
+    @FindBy(css = "[data-test='shopping-cart-link']")
+    public WebElement cartIcon;
+
+    @FindBy(css = "[data-test='shopping-cart-badge']")
+    public WebElement cartBadge;
+
+    public By addBtn = By.cssSelector("button[data-test^='add-to-cart']");
+    public By btnRemove = By.cssSelector("button[data-test^='remove']");
+    public By itemName  = By.cssSelector("[data-test='inventory-item-name']");
+    public By itemDesc  = By.cssSelector("[data-test='inventory-item-desc']");
+    public By itemPrice = By.cssSelector("[data-test='inventory-item-price']");
+
 }

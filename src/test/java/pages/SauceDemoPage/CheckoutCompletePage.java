@@ -10,10 +10,16 @@ public class CheckoutCompletePage {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
-    @FindBy(css = ".title")
-    public WebElement pageTitle;
+    @FindBy(css = "[data-test='title']")
+    public WebElement pageTitle; // "Checkout: Complete!"
 
-    @FindBy(css = ".complete-header")
-    public WebElement completeHeader;
+    @FindBy(css = "[data-test='complete-header']")
+    public WebElement completeHeader; // "Thank you for your order!"
+
+    @FindBy(css = "[data-test='complete-text']")
+    public WebElement completeText;
+
+    @FindBy(css = "[data-test='back-to-products']")
+    public WebElement btnBackHome;
 
 }

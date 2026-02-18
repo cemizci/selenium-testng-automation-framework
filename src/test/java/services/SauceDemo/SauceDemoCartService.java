@@ -19,10 +19,9 @@ public class SauceDemoCartService {
         WaitUtils.waitForVisibility(p.pageTitle,5);
 
         for (WebElement card : p.productCards){
-            WebElement addBtn = p.addToCartButton;
 
-            if (addBtn.getText().trim().equalsIgnoreCase("Add to cart")){
-                addBtn.click();
+            if (!card.findElements(p.addBtn).isEmpty()) {
+                card.findElement(p.addBtn).click();
             }
         }
 
@@ -31,42 +30,44 @@ public class SauceDemoCartService {
     public void removeAllProductsFromProductPage(){
 
         ProductsPage p = new ProductsPage();
+        WaitUtils.waitForVisibility(p.pageTitle, 5);
 
-        for (WebElement card : p.productCards){
-            WebElement removeBtn = p.removeButtons;
-
-            removeBtn.click();
+        for (WebElement card : p.productCards) {
+            if (!card.findElements(p.btnRemove).isEmpty()) {
+                card.findElement(p.btnRemove).click();
+            }
         }
     }
 
-
     public Map<String, Item> getAllProductsFromProductsPage(){
-        ProductsPage productsPage = new ProductsPage();
+        ProductsPage p = new ProductsPage();
+        WaitUtils.waitForVisibility(p.pageTitle, 5);
+
         Map<String, Item> map = new LinkedHashMap<>();
 
-        for (WebElement card : productsPage.productCards){
-            String name = card.findElement(By.cssSelector(".inventory_item_name")).getText().trim();
-            String desc = card.findElement(By.cssSelector(".inventory_item_desc")).getText().trim();
-            String price = card.findElement(By.cssSelector(".inventory_item_price")).getText().trim();
+        for (WebElement card : p.productCards){
+            String name = card.findElement(p.itemName).getText().trim();
+            String desc = card.findElement(p.itemDesc).getText().trim();
+            String price = card.findElement(p.itemPrice).getText().trim();
 
             map.put(name, new Item(name, desc, price));
         }
-
         return map;
     }
 
     public Map<String, Item> getAllItemsFromCartPage(){
         CartPage cartPage = new CartPage();
+        WaitUtils.waitForVisibility(cartPage.pageTitle, 5);
+
         Map<String, Item> map = new LinkedHashMap<>();
 
         for (WebElement item : cartPage.cartItems) {
-            String name = item.findElement(By.cssSelector(".inventory_item_name")).getText().trim();
-            String desc = item.findElement(By.cssSelector(".inventory_item_desc")).getText().trim();
-            String price = item.findElement(By.cssSelector(".inventory_item_price")).getText().trim();
+            String name = item.findElement(cartPage.itemName).getText().trim();
+            String desc = item.findElement(cartPage.itemDesc).getText().trim();
+            String price = item.findElement(cartPage.itemPrice).getText().trim();
 
             map.put(name, new Item(name, desc, price));
         }
-
         return map;
     }
 

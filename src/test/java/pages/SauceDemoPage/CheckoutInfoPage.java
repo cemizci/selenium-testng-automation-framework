@@ -25,4 +25,22 @@ public class CheckoutInfoPage {
 
     @FindBy(id = "continue")
     public WebElement continueButton;
+
+    //@FindBy(css = "[data-test='title']")
+    //public WebElement pageTitle; // "Checkout: Your Information"
+
+    @FindBy(css = "[data-test='firstName']")
+    public WebElement firstName;
+
+    @FindBy(css = "[data-test='lastName']")
+    public WebElement lastName;
+
+    @FindBy(css = "[data-test='postalCode']")
+    public WebElement postalCode;
+
+    @FindBy(css = "[data-test='continue']")
+    public WebElement btnContinue;
+
+    @FindBy(css = "[data-test='cancel']")
+    public WebElement btnCancel;
 }
