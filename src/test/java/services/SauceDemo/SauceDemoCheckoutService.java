@@ -37,6 +37,7 @@ public class SauceDemoCheckoutService {
 
         CheckoutCompletePage complete = new CheckoutCompletePage();
         WaitUtils.waitForVisibility(complete.pageTitle, 5);
+        System.out.println(complete.pageTitle.getText());
     }
 
     public void completeCheckout(String firstName, String lastName, String zip) {
