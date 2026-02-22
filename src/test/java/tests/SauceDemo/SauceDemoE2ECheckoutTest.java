@@ -33,26 +33,17 @@ public class SauceDemoE2ECheckoutTest extends BaseTest {
         ProductsPage productsPage = new ProductsPage();
         WaitUtils.waitForVisibility(productsPage.pageTitle, 5);
 
-        System.out.println("Products count: " + productsPage.productCards.size());
-        softAssert.assertEquals(productsPage.productCards.size(), 6, "Products sayfasında 6 ürün olmalı");
 
         cartServices.addAllProductsToCart();
         softAssert.assertFalse(productsPage.cartBadges.isEmpty(),
                 "Cart badge görünmeli");
 
-        softAssert.assertEquals(productsPage.cartBadges.get(0).getText().trim(),
-                "6", "Cart badge 6 olmalı");
 
         productsPage.shoppingCartIcon.click();
-
-        CartPage cartPage = new CartPage();
-        WaitUtils.waitForVisibility(cartPage.pageTitle, 5);
-
 
         SauceDemoCheckoutService checkoutService = new SauceDemoCheckoutService();
         checkoutService.proceedToCheckout();
         checkoutService.fillCheckoutInfoAndContinue("a","b","3");
-        System.out.println(cartPage.cartItems.size());
 
         checkoutService.finishCheckout();
         softAssert.assertAll();
