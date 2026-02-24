@@ -12,6 +12,8 @@ import services.SauceDemo.SauceDemoCartService;
 import services.TestOtomasyonu.CartService;
 import utilities.WaitUtils;
 
+import java.util.List;
+
 public class ProductsCatalogTest extends BaseTest {
 
     @Test
@@ -30,8 +32,22 @@ public class ProductsCatalogTest extends BaseTest {
         for (Item item : cartService.getAllProductsFromProductsPage().values()) {
             Assert.assertFalse(item.getName().isEmpty());
             Assert.assertFalse(item.getDesc().isEmpty());
+            Assert.assertFalse(item.getPrice().isEmpty());
             Assert.assertTrue(item.getPrice().startsWith("$"));
+
             System.out.println(item);
+            System.out.println(item.getPrice());
         }
+
+        List<String> badTitles = productsPage.getBadTitleThatLookLikeCode();
+        List<String> badDescs = productsPage.getBadDescriptionsThatLookLikeCode();
+
+        softAssert.assertTrue(badTitles.isEmpty(),
+                "Kod benzeri ürün başlıkları bulundu: " + badTitles);
+
+        softAssert.assertTrue(badDescs.isEmpty(),
+                "Kod benzeri ürün açıklamaları bulundu: " + badDescs);
+
+        softAssert.assertAll();
     }
 }

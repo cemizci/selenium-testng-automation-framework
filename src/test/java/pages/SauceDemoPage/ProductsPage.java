@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import utilities.ContentSanity;
 import utilities.Driver;
 
 import java.util.ArrayList;
@@ -60,5 +61,30 @@ public class ProductsPage {
     public By itemName  = By.cssSelector("[data-test='inventory-item-name']");
     public By itemDesc  = By.cssSelector("[data-test='inventory-item-desc']");
     public By itemPrice = By.cssSelector("[data-test='inventory-item-price']");
+
+
+    public List<String> getBadTitleThatLookLikeCode(){
+        List<String> bad = new ArrayList<>();
+
+        for (WebElement card : productCards){
+            String title = card.findElement(itemName).getText().trim();
+            if (ContentSanity.looksLikeCode(title)){
+                bad.add(title);
+            }
+        }
+        return  bad;
+    }
+
+
+    public List<String> getBadDescriptionsThatLookLikeCode(){
+        List<String> bad = new ArrayList<>();
+        for (WebElement card : productCards){
+            String desc = card.findElement(itemDesc).getText().trim();
+            if (ContentSanity.looksLikeCode(desc)){
+                bad.add(desc);
+            }
+        }
+        return bad;
+    }
 
 }
