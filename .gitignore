@@ -40,6 +40,7 @@ build/
 
 # Logs
 logs/
+*.log
 
 # Sensitive config
 configuration.properties
@@ -47,3 +48,6 @@ configuration.properties
 # Test reports
 allure-results/
 extent-reports/
+
+# Target
+/target/

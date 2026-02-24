@@ -13,42 +13,44 @@ import java.util.Map;
 
 public class Driver {
 
-    private Driver(){
+    private Driver() {}
 
-    }
-
-    public static WebDriver driver;
-
+    private static final ThreadLocal<WebDriver> driverPool = new ThreadLocal<>();
 
     public static WebDriver getDriver(){
 
-        String useToBrowser = ConfigReader.getProperty("browser");
+        if (driverPool.get() == null){
+            String browser = ConfigReader.getProperty("browser");
+            boolean headless = Boolean.parseBoolean(ConfigReader.getProperty("headless"));
 
-        if (driver == null){
+            WebDriver driver;
 
-            switch (useToBrowser){
-                case "safari" :
-                    driver = new SafariDriver();
-                    break;
-                case "firefox" :
+            switch (browser.toLowerCase()) {
+
+                case "firefox":
                     driver = new FirefoxDriver();
                     break;
-                case "edge" :
+
+                case "edge":
                     driver = new EdgeDriver();
                     break;
-                default:
 
+                case "safari":
+                    driver = new SafariDriver();
+                    break;
+
+                default:
                     ChromeOptions options = new ChromeOptions();
 
-                    options.addArguments("--incognito");
-                    options.addArguments("--guest");
+                    if (headless) {
+                        options.addArguments("--headless=new");
+                        options.addArguments("--window-size=1920,1080");
+                    }
 
+                    options.addArguments("--incognito");
                     options.addArguments("--disable-notifications");
                     options.addArguments("--disable-infobars");
                     options.addArguments("--disable-save-password-bubble");
-                    options.addArguments("--disable-features=PasswordManagerOnboarding");
-                    options.addArguments("--disable-features=PasswordLeakDetection,PasswordManagerOnboarding");
-
 
                     Map<String, Object> prefs = new HashMap<>();
                     prefs.put("credentials_enable_service", false);
@@ -57,22 +59,26 @@ public class Driver {
 
                     options.setExperimentalOption("prefs", prefs);
 
-                    driver = new ChromeDriver();
-            }
+                    driver = new ChromeDriver(options);
+        }
+
             driver.manage().window().maximize();
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
+
+            driverPool.set(driver);
         }
 
-        return driver;
+        return driverPool.get();
     }
 
-    public static void quitDriver(){
-        if (driver != null){
+    public static void quitDriver() {
+        WebDriver driver = driverPool.get();
+
+        if (driver != null) {
             driver.quit();
-            driver= null;
+            driverPool.remove();
         }
     }
-
 }
 
 
