@@ -9,7 +9,7 @@
 
     <test name="SauceDemo Tests">
         <packages>
-            <package name="tests.saucedemo"/>
+            <package name="tests.SauceDemo"/>
         </packages>
     </test>
 </suite>

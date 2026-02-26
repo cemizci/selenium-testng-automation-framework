@@ -1,4 +1,4 @@
-package Listeners;
+package listeners;
 
 import org.slf4j.MDC;
 import org.testng.ITestContext;
@@ -11,21 +11,7 @@ public class TestAllureListener implements ITestListener {
     private static final String ATTACHMENT_DONE_FLAG = "allure.attachments.done";
 
     @Override
-    public void onTestStart(ITestResult result) {
-        MDC.put("testName", result.getMethod().getMethodName());
-    }
-
-    @Override
     public void onTestFailure(ITestResult result) {
-        attachIfNotDone(result);
-    }
-
-    @Override
-    public void onFinish(ITestContext context) {
-        MDC.clear();
-    }
-
-    private void attachIfNotDone(ITestResult result) {
         Object flag = result.getAttribute(ATTACHMENT_DONE_FLAG);
         if (flag instanceof Boolean && (Boolean) flag) return;
 
@@ -39,5 +25,17 @@ public class TestAllureListener implements ITestListener {
         if (result.getThrowable() != null) {
             AllureUtils.attachText("Failure Reason", result.getThrowable().toString());
         }
- }
+
+        MDC.clear();
+    }
+
+    @Override
+    public void onTestSuccess(ITestResult context) {
+        MDC.clear();
+    }
+
+    @Override
+    public void onTestSkipped(ITestResult result) {
+        MDC.clear();
+    }
 }
