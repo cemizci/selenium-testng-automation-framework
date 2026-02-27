@@ -48,4 +48,32 @@ public class SauceDemoE2ECheckoutTest extends BaseTest {
         checkoutService.finishCheckout();
         softAssert.assertAll();
     }
+
+    @Test
+    public void shouldNotAllowCheckoutWhenCartIsEmpty(){
+        SauceDemoAuthService authService = new SauceDemoAuthService();
+
+        authService.goToLoginPage();
+        authService.loginWithValidUser();
+
+        ProductsPage productsPage = new ProductsPage();
+        WaitUtils.waitForVisibility(productsPage.pageTitle, 5);
+
+        productsPage.shoppingCartIcon.click();
+
+        CartPage cartPage = new CartPage();
+        int itemCount = cartPage.cartItems.size();
+        System.out.println(itemCount);
+        boolean checkoutEnabled = cartPage.checkoutButton.isEnabled();
+        softAssert.assertFalse(cartPage.cartItems.isEmpty(),"Cartta ürün yok");
+
+        SauceDemoCheckoutService checkoutService = new SauceDemoCheckoutService();
+        checkoutService.proceedToCheckout();
+        checkoutService.fillCheckoutInfoAndContinue("a","b","3");
+        checkoutService.finishCheckout();
+
+        CheckoutCompletePage completePage = new CheckoutCompletePage();
+        System.out.printf(completePage.completeText.getText());
+        softAssert.assertFalse(completePage.completeHeader.isDisplayed(),"Sepette ürün yokken sipariş tamamlandı!");
+    }
 }

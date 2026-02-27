@@ -22,4 +22,6 @@ public class CheckoutCompletePage {
     @FindBy(css = "[data-test='back-to-products']")
     public WebElement btnBackHome;
 
+
+
 }
