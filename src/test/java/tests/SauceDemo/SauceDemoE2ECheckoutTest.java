@@ -57,23 +57,26 @@ public class SauceDemoE2ECheckoutTest extends BaseTest {
         authService.loginWithValidUser();
 
         ProductsPage productsPage = new ProductsPage();
-        WaitUtils.waitForVisibility(productsPage.pageTitle, 5);
-
         productsPage.shoppingCartIcon.click();
 
         CartPage cartPage = new CartPage();
         int itemCount = cartPage.cartItems.size();
-        System.out.println(itemCount);
-        boolean checkoutEnabled = cartPage.checkoutButton.isEnabled();
-        softAssert.assertFalse(cartPage.cartItems.isEmpty(),"Cartta ürün yok");
+        System.out.println("Number of products on the cart : " + itemCount);
+
+        softAssert.assertEquals(cartPage.cartItems.size(),0, "Precondition failed: Cart should be empty.");
+        softAssert.assertFalse(cartPage.checkoutButton.isEnabled(), "Checkout button should be disabled when the cart is empty.");
 
         SauceDemoCheckoutService checkoutService = new SauceDemoCheckoutService();
         checkoutService.proceedToCheckout();
         checkoutService.fillCheckoutInfoAndContinue("a","b","3");
-        checkoutService.finishCheckout();
+
+        CheckoutOverviewPage overviewPage = new CheckoutOverviewPage();
+        overviewPage.printSummaryDetails();
+        overviewPage.finishButton.click();
 
         CheckoutCompletePage completePage = new CheckoutCompletePage();
+        System.out.println(completePage.completeHeader.getText());
         System.out.printf(completePage.completeText.getText());
-        softAssert.assertFalse(completePage.completeHeader.isDisplayed(),"Sepette ürün yokken sipariş tamamlandı!");
+        softAssert.assertFalse(completePage.completeHeader.isDisplayed(),"The purchase was complete when the cart was empty.");
     }
 }
