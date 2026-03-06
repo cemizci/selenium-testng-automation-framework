@@ -21,4 +21,19 @@ public class LoginPage {
 
     @FindBy(css = "[data-test='error']")
     public WebElement errorMessage;
+
+    @FindBy(css = "[data-test='error']")
+    public WebElement errorContainer;
+
+    public boolean isErrorVisible() {
+        try{
+            return errorContainer.isDisplayed();
+        }catch(Exception e){
+            return false;
+        }
+    }
+
+    public String getErrorText() {
+        return errorContainer.getText().trim();
+    }
 }

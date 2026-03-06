@@ -1,23 +1,31 @@
 package services.SauceDemo;
 
+import io.qameta.allure.Step;
 import pages.SauceDemoPage.LoginPage;
 import utilities.ConfigReader;
 import utilities.Driver;
 
+
 public class SauceDemoAuthService {
+
+    @Step("Open SauceDemo login page")
     public void goToLoginPage(){
         Driver.getDriver().get(ConfigReader.getProperty("saucedemo.url"));
     }
 
+    @Step("Login with valid user")
     public void loginWithValidUser(){
-        LoginPage loginPage = new LoginPage();
-        loginPage.usernameInput.sendKeys(ConfigReader.getProperty("saucedemo.username"));
-        loginPage.passwordInput.sendKeys(ConfigReader.getProperty("saucedemo.password"));
-        loginPage.loginButton.click();
+        login(
+                ConfigReader.getProperty("saucedemo.username"),
+                ConfigReader.getProperty("saucedemo.password")
+        );
     }
 
+    @Step("Login attempt with username: {username}")
     public void login(String username, String password){
         LoginPage loginPage = new LoginPage();
+        loginPage.usernameInput.clear();
+        loginPage.passwordInput.clear();
         loginPage.usernameInput.sendKeys(username);
         loginPage.passwordInput.sendKeys(password);
         loginPage.loginButton.click();
