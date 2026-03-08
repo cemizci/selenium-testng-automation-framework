@@ -61,6 +61,7 @@ public class ProductsPage {
     public By itemName  = By.cssSelector("[data-test='inventory-item-name']");
     public By itemDesc  = By.cssSelector("[data-test='inventory-item-desc']");
     public By itemPrice = By.cssSelector("[data-test='inventory-item-price']");
+    public By itemImage = By.cssSelector(".inventory_item_img img");
 
 
     public List<String> getBadTitleThatLookLikeCode(){
