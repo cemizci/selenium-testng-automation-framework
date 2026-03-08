@@ -8,6 +8,8 @@ import org.testng.annotations.Test;
 import pages.SauceDemoPage.LoginPage;
 import pages.SauceDemoPage.ProductsPage;
 import services.SauceDemo.SauceDemoAuthService;
+import utilities.ConfigReader;
+import utilities.Driver;
 import utilities.WaitUtils;
 
 public class LoginTest extends BaseTest {
@@ -35,5 +37,24 @@ public class LoginTest extends BaseTest {
                             + " | Expected error to contain: " + c.expectedErrorContains()
                             + " but was: " + actualError);
         }
+    }
+
+    @Test
+    public void locked_out_user_should_not_be_able_to_login(){
+        SauceDemoAuthService authService = new SauceDemoAuthService();
+        LoginPage loginPage = new LoginPage();
+
+        authService.goToLoginPage();
+        authService.login(ConfigReader.getProperty("saucedemo.user.locked"), ConfigReader.getProperty("saucedemo.password"));
+
+        softAssert.assertTrue(loginPage.isErrorVisible(),
+                "Locked out user should see an error message.");
+
+        String actualErrorMessage = loginPage.getErrorText();
+        softAssert.assertTrue(actualErrorMessage.contains(SauceDemoErrorMessages.LOCKED_OUT),
+                "Expected locked out error message, but was: " + actualErrorMessage);
+
+        softAssert.assertFalse(Driver.getDriver().getCurrentUrl().contains("inventory.html"),
+                "Locked out user should not be redirected to inventory page.");
     }
 }
