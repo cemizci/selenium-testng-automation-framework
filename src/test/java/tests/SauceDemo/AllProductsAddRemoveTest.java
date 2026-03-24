@@ -9,7 +9,7 @@ import services.SauceDemo.SauceDemoAuthService;
 import services.SauceDemo.SauceDemoCartService;
 import utilities.WaitUtils;
 
-public class SauceDemo_AddRemove_StateTest extends BaseTest {
+public class AllProductsAddRemoveTest extends BaseTest {
 
     @Test
     public void add_to_cart_and_remove_should_update_ui_state(){

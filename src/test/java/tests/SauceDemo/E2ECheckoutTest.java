@@ -1,10 +1,6 @@
 package tests.SauceDemo;
 
-import Models.SauceDemo.Item;
 import base.BaseTest;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Wait;
 import org.testng.annotations.Test;
 import pages.SauceDemoPage.CartPage;
 import pages.SauceDemoPage.CheckoutCompletePage;
@@ -13,14 +9,9 @@ import pages.SauceDemoPage.ProductsPage;
 import services.SauceDemo.SauceDemoAuthService;
 import services.SauceDemo.SauceDemoCartService;
 import services.SauceDemo.SauceDemoCheckoutService;
-import services.TestOtomasyonu.CheckoutService;
-import utilities.Driver;
 import utilities.WaitUtils;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-public class SauceDemoE2ECheckoutTest extends BaseTest {
+public class E2ECheckoutTest extends BaseTest {
 
     @Test
     public void e2e_login_addToCart_checkout_success(){

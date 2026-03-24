@@ -9,6 +9,7 @@ import services.SauceDemo.SauceDemoProductService;
 import utilities.ConfigReader;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -24,26 +25,24 @@ public class ProblemUserInventoryTest extends BaseTest {
 
         SauceDemoProductService productService = new SauceDemoProductService();
 
-        Map<String, Item> products = productService.getAllProductsWithImagesFromProductsPage();
+        List<Item> products = productService.getAllProductsFromInventory();
 
         Set<String> uniqueImageSources = new LinkedHashSet<>();
         StringBuilder imageReport = new StringBuilder("\nProduct -> Image Src\n");
 
-        for (Map.Entry<String, Item> entry : products.entrySet()){
-            String productName = entry.getKey();
-            Item item = entry.getValue();
+        for (Item item : products){
 
             softAssert.assertNotNull(
                     item.getImage(),
-                    ""
+                    "Image src should not be null for product: " + item.getName()
             );
 
             softAssert.assertFalse(item.getImage().isBlank(),
-                    "Image src should not be blank for product: " + productName);
+                    "Image src should not be blank for product: " + item.getName());
 
             uniqueImageSources.add(item.getImage());
 
-            imageReport.append(productName)
+            imageReport.append(item.getName())
                     .append(" -> ")
                     .append(item.getImage())
                     .append("\n");
@@ -59,5 +58,50 @@ public class ProblemUserInventoryTest extends BaseTest {
                         "\n\nImage usage report:" + imageReport
 
         );
+    }
+
+    @Test
+    public void all_inventory_products_should_match_pdp(){
+        SauceDemoAuthService authService = new SauceDemoAuthService();
+        authService.goToLoginPage();
+        authService.login(
+                ConfigReader.getProperty("saucedemo.user.problem"),
+                ConfigReader.getProperty("saucedemo.password")
+        );
+
+        SauceDemoProductService productService = new SauceDemoProductService();
+
+        List<Item> inventoryItems = productService.getAllProductsFromInventory();
+        List<Item> pdpItems = productService.getAllProductsFromPdpPages();
+
+        for (int i = 0; i < inventoryItems.size(); i++){
+           Item inv = inventoryItems.get(i);
+           Item pdp = pdpItems.get(i);
+
+           softAssert.assertEquals(
+                   pdp.getName(),
+                   inv.getName(),
+                   "Name mismatch for product at index " + i
+           );
+
+           softAssert.assertEquals(
+                   pdp.getDesc(),
+                   inv.getDesc(),
+                   "Description mismatch for product: " + inv.getName()
+           );
+
+           softAssert.assertEquals(
+                   pdp.getPrice(),
+                   inv.getPrice(),
+                   "Price mismatch for product: " + inv.getName()
+           );
+
+           softAssert.assertEquals(
+                   pdp.getImage(),
+                   inv.getImage(),
+                   "Price mismatch for product: " + inv.getName()
+           );
+
+        }
     }
 }
