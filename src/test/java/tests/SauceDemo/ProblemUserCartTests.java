@@ -1,12 +1,19 @@
 package tests.SauceDemo;
 
 import base.BaseTest;
+import io.qameta.allure.Allure;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import pages.SauceDemoPage.ProductsPage;
 import services.SauceDemo.SauceDemoAuthService;
+import services.SauceDemo.SauceDemoCartService;
+import services.SauceDemo.SauceDemoProductService;
+import utilities.AllureUtils;
 import utilities.ConfigReader;
 import utilities.WaitUtils;
+
+import java.io.ByteArrayInputStream;
 
 public class ProblemUserCartTests extends BaseTest {
 
@@ -169,5 +176,25 @@ public class ProblemUserCartTests extends BaseTest {
                         failedProductsReport
         );
 
+    }
+
+    @Test(description = "Problem user should be able to add all products to cart from PDP pages")
+    public void problemUserShouldAddAllProductsToCartFromPdp(){
+        SauceDemoAuthService authService = new SauceDemoAuthService();
+        authService.goToLoginPage();
+        authService.login(
+                ConfigReader.getProperty("saucedemo.user.problem"),
+                ConfigReader.getProperty("saucedemo.password")
+        );
+
+        SauceDemoCartService cartService = new SauceDemoCartService();
+        SauceDemoProductService productService = new SauceDemoProductService();
+
+        int totalProducts = productService.getAllProductsFromInventory().size();
+        int addedCount = cartService.addAllProductsToCartFromPdp();
+        int cartBadge = cartService.getCartBadgeCount();
+
+        softAssert.assertEquals(addedCount,totalProducts, "Not all products were added from PDP");
+        softAssert.assertEquals(cartBadge, totalProducts, "Cart badge count mismatch");
     }
 }

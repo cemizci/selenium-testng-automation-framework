@@ -21,4 +21,7 @@ public class ProductDetailPage {
 
     @FindBy(css = ".inventory_details_img")
     public WebElement productImage;
+
+    @FindBy(css = "[data-test='add-to-cart']")
+    public WebElement addToCartBtn;
 }
