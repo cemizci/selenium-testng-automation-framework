@@ -1,20 +1,17 @@
-package services.SauceDemo;
+package services.saucedemo;
 
-import Models.SauceDemo.Item;
-import org.openqa.selenium.By;
+import models.saucedemo.Item;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Wait;
-import pages.SauceDemoPage.CartPage;
-import pages.SauceDemoPage.ProductDetailPage;
-import pages.SauceDemoPage.ProductsPage;
+import pages.saucedemo.CartPage;
+import pages.saucedemo.ProductDetailPage;
+import pages.saucedemo.ProductsPage;
 import utilities.Driver;
 import utilities.WaitUtils;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
-public class SauceDemoCartService {
+public class CartService {
 
     public void addAllProductsToCart(){
 

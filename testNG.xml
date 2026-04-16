@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="SauceDemo Suite">
+<suite name="saucedemo Suite">
     <listeners>
         <!-- Allure TestNG listener -->
         <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
@@ -7,9 +7,9 @@
         <listener class-name="listeners.TestAllureListener"/>
     </listeners>
 
-    <test name="SauceDemo Tests">
+    <test name="saucedemo Tests">
         <packages>
-            <package name="tests.SauceDemo"/>
+            <package name="tests.saucedemo"/>
         </packages>
     </test>
 </suite>

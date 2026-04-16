@@ -1,6 +1,5 @@
-package pages.SauceDemoPage;
+package pages.saucedemo;
 
-import Models.SauceDemo.Item;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

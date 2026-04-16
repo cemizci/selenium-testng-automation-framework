@@ -1,20 +1,20 @@
-package tests.SauceDemo;
+package tests.saucedemo;
 
 import base.BaseTest;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
-import pages.SauceDemoPage.CartPage;
-import pages.SauceDemoPage.ProductsPage;
-import services.SauceDemo.SauceDemoAuthService;
-import services.SauceDemo.SauceDemoCartService;
+import pages.saucedemo.CartPage;
+import pages.saucedemo.ProductsPage;
+import services.saucedemo.AuthService;
+import services.saucedemo.CartService;
 import utilities.WaitUtils;
 
 public class AllProductsAddRemoveTest extends BaseTest {
 
     @Test
     public void add_to_cart_and_remove_should_update_ui_state(){
-        SauceDemoAuthService auth = new SauceDemoAuthService();
-        SauceDemoCartService cartService = new SauceDemoCartService();
+        AuthService auth = new AuthService();
+        CartService cartService = new CartService();
         ProductsPage productsPage = new ProductsPage();
         CartPage cartPage = new CartPage();
 

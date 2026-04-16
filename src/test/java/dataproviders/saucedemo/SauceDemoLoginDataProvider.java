@@ -1,6 +1,6 @@
 package dataproviders.saucedemo;
 
-import Models.SauceDemo.LoginCase;
+import models.saucedemo.LoginCase;
 import constants.saucedemo.SauceDemoErrorMessages;
 import org.testng.annotations.DataProvider;
 import utilities.ConfigReader;

@@ -1,6 +1,6 @@
-package services.TestOtomasyonu;
+package services.testotomasyonu;
 
-import pages.TestOtomasyonuPage.TestOtomasyonuPage;
+import pages.testotomasyonu.TestOtomasyonuPage;
 import utilities.BrowserUtils;
 import utilities.WaitUtils;
 

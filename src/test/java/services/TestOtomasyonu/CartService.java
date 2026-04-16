@@ -1,7 +1,7 @@
-package services.TestOtomasyonu;
+package services.testotomasyonu;
 
 import org.openqa.selenium.Keys;
-import pages.TestOtomasyonuPage.TestOtomasyonuPage;
+import pages.testotomasyonu.TestOtomasyonuPage;
 import utilities.BrowserUtils;
 import utilities.ConfigReader;
 import utilities.WaitUtils;

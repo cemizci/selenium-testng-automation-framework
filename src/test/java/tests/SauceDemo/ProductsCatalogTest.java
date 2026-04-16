@@ -1,15 +1,12 @@
-package tests.SauceDemo;
+package tests.saucedemo;
 
-import Models.SauceDemo.Item;
+import models.saucedemo.Item;
 import base.BaseTest;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.SauceDemoPage.ProductsPage;
-import services.SauceDemo.SauceDemoAuthService;
-import services.SauceDemo.SauceDemoCartService;
-import services.TestOtomasyonu.CartService;
+import pages.saucedemo.ProductsPage;
+import services.saucedemo.AuthService;
+import services.saucedemo.CartService;
 import utilities.WaitUtils;
 
 import java.util.List;
@@ -18,7 +15,7 @@ public class ProductsCatalogTest extends BaseTest {
 
     @Test
     public void products_should_be_displayed_correctly(){
-        SauceDemoAuthService authService = new SauceDemoAuthService();
+        AuthService authService = new AuthService();
         authService.goToLoginPage();
         authService.loginWithValidUser();
 
@@ -27,7 +24,7 @@ public class ProductsCatalogTest extends BaseTest {
 
         Assert.assertEquals(productsPage.productCards.size(),6,"Products sayfasında 6 ürün olmalı");
 
-        SauceDemoCartService cartService = new SauceDemoCartService();
+        CartService cartService = new CartService();
         cartService.getAllProductsFromProductsPage();
         for (Item item : cartService.getAllProductsFromProductsPage().values()) {
             Assert.assertFalse(item.getName().isEmpty());

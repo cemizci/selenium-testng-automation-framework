@@ -1,10 +1,9 @@
-package services.SauceDemo;
+package services.saucedemo;
 
-import org.openqa.selenium.support.ui.Wait;
-import pages.SauceDemoPage.*;
+import pages.saucedemo.*;
 import utilities.WaitUtils;
 
-public class SauceDemoCheckoutService {
+public class CheckoutService {
     public void addBackpackToCartAndGoToCart(){
         ProductsPage productsPage = new ProductsPage();
         WaitUtils.waitForVisibility(productsPage.pageTitle, 5);

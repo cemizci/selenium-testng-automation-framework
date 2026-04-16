@@ -1,12 +1,12 @@
-package services.SauceDemo;
+package services.saucedemo;
 
 import io.qameta.allure.Step;
-import pages.SauceDemoPage.LoginPage;
+import pages.saucedemo.LoginPage;
 import utilities.ConfigReader;
 import utilities.Driver;
 
 
-public class SauceDemoAuthService {
+public class AuthService {
 
     @Step("Open SauceDemo login page")
     public void goToLoginPage(){

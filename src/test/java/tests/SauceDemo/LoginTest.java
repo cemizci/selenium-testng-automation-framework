@@ -1,13 +1,13 @@
-package tests.SauceDemo;
+package tests.saucedemo;
 
-import Models.SauceDemo.LoginCase;
+import models.saucedemo.LoginCase;
 import base.BaseTest;
 import constants.saucedemo.SauceDemoErrorMessages;
 import dataproviders.saucedemo.SauceDemoLoginDataProvider;
 import org.testng.annotations.Test;
-import pages.SauceDemoPage.LoginPage;
-import pages.SauceDemoPage.ProductsPage;
-import services.SauceDemo.SauceDemoAuthService;
+import pages.saucedemo.LoginPage;
+import pages.saucedemo.ProductsPage;
+import services.saucedemo.AuthService;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.WaitUtils;
@@ -16,7 +16,7 @@ public class LoginTest extends BaseTest {
 
     @Test(dataProvider = "loginMatrix", dataProviderClass = SauceDemoLoginDataProvider.class)
     public void login_matrix_test(LoginCase c){
-        SauceDemoAuthService authService = new SauceDemoAuthService();
+        AuthService authService = new AuthService();
         LoginPage loginPage = new LoginPage();
 
         authService.goToLoginPage();
@@ -41,7 +41,7 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void locked_out_user_should_not_be_able_to_login(){
-        SauceDemoAuthService authService = new SauceDemoAuthService();
+        AuthService authService = new AuthService();
         LoginPage loginPage = new LoginPage();
 
         authService.goToLoginPage();

@@ -1,4 +1,4 @@
-package Models.SauceDemo;
+package models.saucedemo;
 
 import java.util.Objects;
 

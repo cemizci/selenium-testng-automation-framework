@@ -50,4 +50,5 @@ allure-results/
 extent-reports/
 
 # Target
+.allure/
 /target/

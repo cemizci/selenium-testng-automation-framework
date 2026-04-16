@@ -1,25 +1,20 @@
-package tests.SauceDemo;
+package tests.saucedemo;
 
 import base.BaseTest;
-import io.qameta.allure.Allure;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
-import pages.SauceDemoPage.ProductsPage;
-import services.SauceDemo.SauceDemoAuthService;
-import services.SauceDemo.SauceDemoCartService;
-import services.SauceDemo.SauceDemoProductService;
-import utilities.AllureUtils;
+import pages.saucedemo.ProductsPage;
+import services.saucedemo.AuthService;
+import services.saucedemo.CartService;
+import services.saucedemo.ProductService;
 import utilities.ConfigReader;
 import utilities.WaitUtils;
-
-import java.io.ByteArrayInputStream;
 
 public class ProblemUserCartTests extends BaseTest {
 
     @Test
     public void problem_user_should_be_able_to_add_all_inventory_items_to_cart(){
-        SauceDemoAuthService authService = new SauceDemoAuthService();
+        AuthService authService = new AuthService();
         ProductsPage productsPage = new ProductsPage();
 
         authService.goToLoginPage();
@@ -92,7 +87,7 @@ public class ProblemUserCartTests extends BaseTest {
 
     @Test
     public void problem_user_should_be_able_to_remove_added_items_from_inventory(){
-        SauceDemoAuthService authService = new SauceDemoAuthService();
+        AuthService authService = new AuthService();
         ProductsPage productsPage = new ProductsPage();
 
         authService.goToLoginPage();
@@ -180,15 +175,15 @@ public class ProblemUserCartTests extends BaseTest {
 
     @Test(description = "Problem user should be able to add all products to cart from PDP pages")
     public void problemUserShouldAddAllProductsToCartFromPdp(){
-        SauceDemoAuthService authService = new SauceDemoAuthService();
+        AuthService authService = new AuthService();
         authService.goToLoginPage();
         authService.login(
                 ConfigReader.getProperty("saucedemo.user.problem"),
                 ConfigReader.getProperty("saucedemo.password")
         );
 
-        SauceDemoCartService cartService = new SauceDemoCartService();
-        SauceDemoProductService productService = new SauceDemoProductService();
+        CartService cartService = new CartService();
+        ProductService productService = new ProductService();
 
         int totalProducts = productService.getAllProductsFromInventory().size();
         int addedCount = cartService.addAllProductsToCartFromPdp();

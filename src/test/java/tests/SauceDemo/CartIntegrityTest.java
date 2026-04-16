@@ -1,12 +1,12 @@
-package tests.SauceDemo;
+package tests.saucedemo;
 
-import Models.SauceDemo.Item;
+import models.saucedemo.Item;
 import base.BaseTest;
 import org.testng.annotations.Test;
-import pages.SauceDemoPage.CartPage;
-import pages.SauceDemoPage.ProductsPage;
-import services.SauceDemo.SauceDemoAuthService;
-import services.SauceDemo.SauceDemoCartService;
+import pages.saucedemo.CartPage;
+import pages.saucedemo.ProductsPage;
+import services.saucedemo.AuthService;
+import services.saucedemo.CartService;
 import utilities.WaitUtils;
 
 import java.util.Map;
@@ -15,7 +15,7 @@ public class CartIntegrityTest extends BaseTest {
 
     @Test
     public void CartItemsShouldMatchProductsTest(){
-        SauceDemoAuthService authService = new SauceDemoAuthService();
+        AuthService authService = new AuthService();
 
 
         authService.goToLoginPage();
@@ -24,7 +24,7 @@ public class CartIntegrityTest extends BaseTest {
         ProductsPage productsPage = new ProductsPage();
         WaitUtils.waitForVisibility(productsPage.pageTitle, 5);
 
-        SauceDemoCartService cartServices = new SauceDemoCartService();
+        CartService cartServices = new CartService();
 
         System.out.println("Products count: " + productsPage.productCards.size());
         softAssert.assertEquals(productsPage.productCards.size(), 6, "Products sayfasında 6 ürün olmalı");
