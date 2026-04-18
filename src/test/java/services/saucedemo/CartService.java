@@ -13,18 +13,21 @@ import java.util.Map;
 
 public class CartService {
 
-    public void addAllProductsToCart(){
+    public int addAllProductsToCart(){
 
         ProductsPage p = new ProductsPage();
         WaitUtils.waitForVisibility(p.pageTitle,5);
 
+        int count = 0;
         for (WebElement card : p.productCards){
 
             if (!card.findElements(p.addBtn).isEmpty()) {
                 card.findElement(p.addBtn).click();
+                count++;
             }
         }
 
+        return count;
     }
 
     public void removeAllProductsFromProductPage(){
